@@ -27,10 +27,16 @@ var userId6 = "JHA";
 var userId7 = "SZF";
 var userId8 = "JL";
 
-var team1 = ["LK", "JHA", "SZF"];
+/* var team1 = ["LK", "JHA", "SZF"];
 var team2 = ["TJY", "LXR", "JL"];
 var otherUsers = ["TJY", "LXR", "JL", "LK", "JHA", "SZF"];
 var students = ["TJY", "LXR", "JL", "LK", "JHA", "SZF"];
+var rounds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; */
+
+/* var team1 = ["LK", "JHA", "SZF"];
+var team2 = ["TJY", "LXR", "JL"]; */
+var otherUsers = ["HJ", "JZ", "JX"];
+var students = ["HJ", "JZ", "JX"];
 var rounds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 var nickname = '';
@@ -105,9 +111,10 @@ const promptMsg = () => {
     } else if (nick === '3839') {
         nickname = 'SZF'
         correctPin = true;
+    } else if (nick === '5691') {
+        nickname = 'JV'
     } else if (nick === '88888') {
         nickname = 'TCR'
-        correctPin = true;
     } else if (nick === '3583') {
         nickname = 'JHA'
         correctPin = true;
@@ -123,6 +130,12 @@ const promptMsg = () => {
         nickname = 'LOK'
     } else if (nick === '7089') {
         nickname = 'JW'
+    } else if (nick === '1289') {
+        nickname = 'JZ'
+    } else if (nick === '3825') {
+        nickname = 'JX'
+    } else if (nick === '1399') {
+        nickname = 'HJ'
     } else {
         alert("Wrong pin number!");
         promptMsg();
@@ -233,290 +246,6 @@ sock.on('chat-to-clients', data => {
 });
 
 
-/* sock.on('updateallwins', data => {
-    if (data.aumWins > aumWins) {
-        var aumWinDif = data.aumWins - aumWins;
-        var userId = "AA"
-        updateAllWins(userId, aumWinDif);
-        aumWins = data.aumWins;
-    }
-    if (data.ninaWins > ninaWins) {
-        var ninaWinDif = data.ninaWins - ninaWins;
-        var userId = "NN"
-        updateAllWins(userId, ninaWinDif);
-        ninaWins = data.ninaWins;
-    }
-    if (data.LKWins > LKWins) {
-        var LKWinDif = data.LKWins - LKWins;
-        var userId = "LK"
-        updateAllWins(userId, LKWinDif);
-        LKWins = data.LKWins;
-    }
-    if (data.LXRWins > LXRWins) {
-        var LXRWinDif = data.LXRWins - LXRWins;
-        var userId = "LXR"
-        updateAllWins(userId, LXRWinDif);
-        LXRWins = data.LXRWins;
-    }
-    if (data.JHAWins > JHAWins) {
-        var JHAWinDif = data.JHAWins - JHAWins;
-        var userId = "JHA"
-        updateAllWins(userId, JHAWinDif);
-        JHAWins = data.JHAWins;
-    }
-    if (data.SZFWins > SZFWins) {
-        var SZFWinDif = data.SZFWins - SZFWins;
-        var userId = "SZF"
-        updateAllWins(userId, SZFWinDif);
-        SZFWins = data.SZFWins;
-    }
-    if (data.JLWins > JLWins) {
-        var JLWinDif = data.JLWins - JLWins;
-        var userId = "JL"
-        updateAllWins(userId, JLWinDif);
-        JLWins = data.JLWins;
-    }
-    if (data.TJYWins > TJYWins) {
-        var TJYWinDif = data.TJYWins - TJYWins;
-        var userId = "TJY"
-        updateAllWins(userId, TJYWinDif);
-        TJYWins = data.TJYWins;
-    }
-
-    //MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
-    if (data.aumWins < aumWins) {
-        var userId = "AA"
-        removeWin(userId, aumWins);
-        aumWins = data.aumWins;
-    }
-    if (data.ninaWins < ninaWins) {
-        var userId = "NN"
-        removeWin(userId, ninaWins);
-        ninaWins = data.ninaWins;
-    }
-    if (data.LKWins < LKWins) {
-        var userId = "LK"
-        removeWin(userId, LKWins);
-        LKWins = data.LKWins;
-    }
-    if (data.LXRWins < LXRWins) {
-        var userId = "LXR"
-        removeWin(userId, LXRWins);
-        LXRWins = data.LXRWins;
-    }
-    if (data.JHAWins < JHAWins) {
-        var userId = "JHA"
-        removeWin(userId, JHAWins);
-        JHAWins = data.JHAWins;
-    }
-    if (data.SZFWins < SZFWins) {
-        var userId = "SZF"
-        removeWin(userId, SZFWins);
-        SZFWins = data.SZFWins;
-    }
-    if (data.JLWins < JLWins) {
-        var userId = "JL"
-        removeWin(userId, JLWins);
-        JLWins = data.JLWins;
-    }
-    if (data.TJYWins < TJYWins) {
-        var userId = "TJY"
-        removeWin(userId, TJYWins);
-        TJYWins = data.TJYWins;
-    }
-
-});
-
-sock.on('updateallchas', data => {
-    if (data.aumChas > aumChas) {
-        var aumChaDif = data.aumChas - aumChas;
-        var userId = "AA"
-        updateAllChas(userId, aumChaDif);
-        aumChas = data.aumChas;
-    }
-    if (data.ninaChas > ninaChas) {
-        var ninaChaDif = data.ninaChas - ninaChas;
-        var userId = "NN"
-        updateAllChas(userId, ninaChaDif);
-        ninaChas = data.ninaChas;
-    }
-    if (data.LKChas > LKChas) {
-        var LKChaDif = data.LKChas - LKChas;
-        var userId = "LK"
-        updateAllChas(userId, LKChaDif);
-        LKChas = data.LKChas;
-    }
-    if (data.LXRChas > LXRChas) {
-        var LXRChaDif = data.LXRChas - LXRChas;
-        var userId = "LXR"
-        updateAllChas(userId, LXRChaDif);
-        LXRChas = data.LXRChas;
-    }
-    if (data.JHAChas > JHAChas) {
-        var JHAChaDif = data.JHAChas - JHAChas;
-        var userId = "JHA"
-        updateAllChas(userId, JHAChaDif);
-        JHAChas = data.JHAChas;
-    }
-    if (data.SZFChas > SZFChas) {
-        var SZFChaDif = data.SZFChas - SZFChas;
-        var userId = "SZF"
-        updateAllChas(userId, SZFChaDif);
-        SZFChas = data.SZFChas;
-    }
-    if (data.JLChas > JLChas) {
-        var JLChaDif = data.JLChas - JLChas;
-        var userId = "JL"
-        updateAllChas(userId, JLChaDif);
-        JLChas = data.JLChas;
-    }
-    if (data.TJYChas > TJYChas) {
-        var TJYChaDif = data.TJYChas - TJYChas;
-        var userId = "TJY"
-        updateAllChas(userId, TJYChaDif);
-        TJYChas = data.TJYChas;
-    }
-
-    //CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
-
-    if (data.aumChas < aumChas) {
-        var userId = "AA"
-        removeCha(userId, aumChas);
-        aumChas = data.aumChas;
-    }
-    if (data.ninaChas < ninaChas) {
-        var userId = "NN"
-        removeCha(userId, ninaChas);
-        ninaChas = data.ninaChas;
-    }
-    if (data.LKChas < LKChas) {
-        var userId = "LK"
-        removeCha(userId, LKChas);
-        LKChas = data.LKChas;
-    }
-    if (data.LXRChas < LXRChas) {
-        var userId = "LXR"
-        removeCha(userId, LXRChas);
-        LXRChas = data.LXRChas;
-    }
-    if (data.JHAChas < JHAChas) {
-        var userId = "JHA"
-        removeCha(userId, JHAChas);
-        JHAChas = data.JHAChas;
-    }
-    if (data.SZFChas < SZFChas) {
-        var userId = "SZF"
-        removeCha(userId, SZFChas);
-        SZFChas = data.SZFChas;
-    }
-    if (data.JLChas < JLChas) {
-        var userId = "JL"
-        removeCha(userId, JLChas);
-        JLChas = data.JLChas;
-    }
-    if (data.TJYChas < TJYChas) {
-        var userId = "TJY"
-        removeCha(userId, TJYChas);
-        TJYChas = data.TJYChas;
-    }
-
-});
-
-
-
-
-
-sock.on('updateallresults', data => {
-    if (data.userId === "AA") {
-        var updatebox = document.getElementById('AAinput');
-        updatebox.value = data.aumRes;
-    }
-    if (data.userId === "NN") {
-        var updatebox = document.getElementById('NNinput');
-        updatebox.value = data.ninaRes;
-    }
-    if (data.userId === "LK") {
-        var updatebox = document.getElementById('LKinput');
-        updatebox.value = data.LKRes;
-    }
-    if (data.userId === "LXR") {
-        var updatebox = document.getElementById('LXRinput');
-        updatebox.value = data.LXRRes;
-    }
-    if (data.userId === "JHA") {
-        var updatebox = document.getElementById('JHAinput');
-        updatebox.value = data.JHARes;
-    }
-    if (data.userId === "SZF") {
-        var updatebox = document.getElementById('SZFinput');
-        updatebox.value = data.SZFRes;
-    }
-    if (data.userId === "JL") {
-        var updatebox = document.getElementById('JLinput');
-        updatebox.value = data.JLRes;
-    }
-    if (data.userId === "TJY") {
-        var updatebox = document.getElementById('TJYinput');
-        updatebox.value = data.TJYRes;
-    }
-});
-
-sock.on('sendchallenge', data => {
-    if (nickname === "TCR") {
-        alert(data + " has called for a Challenge");
-    }
-});
-
-sock.on('refreshall', data => {
-    changeBackground(rotation);
-    rotation++;
-    
-    if (rotation >= 13) {rotation = 1};
-    lifeGiven = 0;
-    roundNum = data;
-    theRound.innerHTML = "Infinity War - Round" + roundNum;
-    var refreshIt = document.getElementById(nickname + "submitbtn");
-    if (nickname != "TCR") {
-        refreshIt.disabled = false;
-    }
-    var refreshIt2 = document.getElementById(nickname + "callcha");
-    if (nickname != "TCR") {
-        refreshIt2.disabled = false;
-    }
-    var refreshIt3 = document.getElementById(nickname + "givebtn");
-    if (nickname != "TCR") {
-        refreshIt3.disabled = false;
-    }
-    var refreshIt4 = document.getElementById(nickname + "reqbtn");
-    if (nickname != "TCR") {
-        refreshIt4.disabled = false;
-    }
-    var clearIt = document.getElementById("LKinput");
-    clearIt.value = '';
-    clearIt = document.getElementById("LXRinput");
-    clearIt.value = '';
-    clearIt = document.getElementById("JHAinput");
-    clearIt.value = '';
-    clearIt = document.getElementById("SZFinput");
-    clearIt.value = '';
-    clearIt = document.getElementById("JLinput");
-    clearIt.value = '';
-    clearIt = document.getElementById("TJYinput");
-    clearIt.value = '';
-
-});
-
-sock.on('lifegained', data => {
-    if (nickname === data.receiverId) {
-        alert("You have gained 1 life from " + data.giverId);
-    }
-});
-
-sock.on('sendrequest', data => {
-    if (nickname === data.requestToId) {
-        alert(data.requesterId +  " is requesting 1 life from you");
-    }
-}); */
 //}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}} LISTENERS FROM SERVER {{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{
 
 
@@ -1157,8 +886,8 @@ function clickableGrid(rows, cols, callback, tblName, userId) {
     span2.setAttribute("id", userId + "span2");
     span2.style = "width:20px;height:20px";
     span2.style.display = "inline-block";
-    span2.style.background = "black";
-    if (nickname === "TCR") {span2.style.background = "green";}
+    span2.style.background = "red";
+    //if (nickname === "TCR") {span2.style.background = "green";}
     for (var r = 0; r < rows; ++r) {
         var tr = grid.appendChild(document.createElement('tr'));
         for (var c = 0; c < cols; ++c) {
@@ -1209,10 +938,10 @@ if (index > -1) {
 //alert(otherUsers);
 
 var grid = clickableGrid(3, 11, function (el, row, col, i) {
-    console.log("You clicked on element:", el);
+    /* console.log("You clicked on element:", el);
     console.log("You clicked on row:", row);
     console.log("You clicked on col:", col);
-    console.log("You clicked on item #:", i);
+    console.log("You clicked on item #:", i); */
 
     el.className = 'clicked';
     if (lastClicked) lastClicked.className = '';
@@ -1225,10 +954,6 @@ var grid = clickableGrid(3, 11, function (el, row, col, i) {
 }, "tbl1", nickname);
 
 var grid2 = clickableGrid(3, 11, function (el, row, col, i) {
-    console.log("You clicked on element:", el);
-    console.log("You clicked on row:", row);
-    console.log("You clicked on col:", col);
-    console.log("You clicked on item #:", i);
 
     el.className = 'clicked';
     if (lastClicked) lastClicked.className = '';
@@ -1241,10 +966,10 @@ var grid2 = clickableGrid(3, 11, function (el, row, col, i) {
 }, "tbl2", otherUsers[0]);
 
 var grid3 = clickableGrid(3, 11, function (el, row, col, i) {
-    console.log("You clicked on element:", el);
+    /* console.log("You clicked on element:", el);
     console.log("You clicked on row:", row);
     console.log("You clicked on col:", col);
-    console.log("You clicked on item #:", i);
+    console.log("You clicked on item #:", i); */
 
     el.className = 'clicked';
     if (lastClicked) lastClicked.className = '';
@@ -1256,70 +981,44 @@ var grid3 = clickableGrid(3, 11, function (el, row, col, i) {
     } */
 }, "tbl3", otherUsers[1]);
 
-var grid4 = clickableGrid(3, 11, function (el, row, col, i) {
-    console.log("You clicked on element:", el);
-    console.log("You clicked on row:", row);
-    console.log("You clicked on col:", col);
-    console.log("You clicked on item #:", i);
+/* var grid4 = clickableGrid(3, 11, function (el, row, col, i) {
 
     el.className = 'clicked';
     if (lastClicked) lastClicked.className = '';
     lastClicked = el;
     number = i
-
-    /* if (i == 15){
-        alert("play hit video")
-    } */
+    
 }, "tbl4", otherUsers[2]);
 
 var grid5 = clickableGrid(3, 11, function (el, row, col, i) {
-    console.log("You clicked on element:", el);
-    console.log("You clicked on row:", row);
-    console.log("You clicked on col:", col);
-    console.log("You clicked on item #:", i);
-
+    
     el.className = 'clicked';
     if (lastClicked) lastClicked.className = '';
     lastClicked = el;
     number = i
 
-    /* if (i == 15){
-        alert("play hit video")
-    } */
 }, "tbl5", otherUsers[3]);
 
 var grid6 = clickableGrid(3, 11, function (el, row, col, i) {
-    console.log("You clicked on element:", el);
-    console.log("You clicked on row:", row);
-    console.log("You clicked on col:", col);
-    console.log("You clicked on item #:", i);
+    
 
     el.className = 'clicked';
     if (lastClicked) lastClicked.className = '';
     lastClicked = el;
     number = i
 
-    /* if (i == 15){
-        alert("play hit video")
-    } */
-}, "tbl6", otherUsers[4]);
+}, "tbl6", otherUsers[4]); */
 
 if (nickname === "TCR") {
     var grid7 = clickableGrid(3, 11, function (el, row, col, i) {
-        console.log("You clicked on element:", el);
-        console.log("You clicked on row:", row);
-        console.log("You clicked on col:", col);
-        console.log("You clicked on item #:", i);
+        
 
         el.className = 'clicked';
         if (lastClicked) lastClicked.className = '';
         lastClicked = el;
         number = i
 
-        /* if (i == 15){
-            alert("play hit video")
-        } */
-    }, "tbl7", otherUsers[5]);
+    }, "tbl7", otherUsers[2]);
 }
 
 document.body.appendChild(grid);
@@ -1495,9 +1194,9 @@ div1.style.float = "left";
 var bottomDiv = document.body.appendChild(div1);
 bottomDiv.appendChild(grid2);
 bottomDiv.appendChild(grid3);
-bottomDiv.appendChild(grid4);
+/* bottomDiv.appendChild(grid4);
 bottomDiv.appendChild(grid5);
-bottomDiv.appendChild(grid6);
+bottomDiv.appendChild(grid6); */
 
 if (nickname === "TCR") {
     bottomDiv.appendChild(grid7);
@@ -1554,10 +1253,4 @@ chatInput.addEventListener("keyup", function(event) {
 
 
 
-//var createLine = document.createElement('hr');
-//createLine.setAttribute("width", "500px");
 
-//document.body.appendChild(grid2);
-//document.body.appendChild(grid3);
-//document.body.appendChild(grid4);
-//document.body.appendChild(grid5);

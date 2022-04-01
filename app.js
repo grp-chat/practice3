@@ -58,7 +58,7 @@ var TJYWins = 0;
 var TJYChas = 1;
 var TJYRes = 0;
 
-var users = ["TJY", "LXR", "JL", "LK", "JHA", "SZF"];
+var users = ["HJ", "JZ", "JX"];
 
 function Person(id, r1, p1, r2, p2, inOrOut) {
     this.id = id;
@@ -71,13 +71,19 @@ function Person(id, r1, p1, r2, p2, inOrOut) {
     this.penalties = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 }
 
-var objLXR = new Person("LXR", 0, 0, 0, 0, false);
+/* var objLXR = new Person("LXR", 0, 0, 0, 0, false);
 var objLK = new Person("LK", 0, 0, 0, 0, false);
 var objTJY = new Person("TJY", 0, 0, 0, 0, false);
 var objJHA = new Person("JHA", 0, 0, 0, 0, false);
 var objJL = new Person("JL", 0, 0, 0, 0, false);
 var objSZF = new Person("SZF", 0, 0, 0, 0, false);
-var objUsers = [objTJY, objLXR, objJL, objLK, objJHA, objSZF];
+var objUsers = [objTJY, objLXR, objJL, objLK, objJHA, objSZF]; */
+
+var objJZ = new Person("JZ", 0, 0, 0, 0, false);
+var objJX = new Person("JX", 0, 0, 0, 0, false);
+var objHJ = new Person("HJ", 0, 0, 0, 0, false);
+var objUsers = [objHJ, objJZ, objJX]; //THIS ARRAY MUST FOLLOW ARRAY SEQUENCE IN INDEX.JS
+
 
 //------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------
