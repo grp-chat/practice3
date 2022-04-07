@@ -58,8 +58,6 @@ var TJYWins = 0;
 var TJYChas = 1;
 var TJYRes = 0;
 
-var users = ["HJ", "JZ", "JX"];
-
 function Person(id, r1, p1, r2, p2, inOrOut) {
     this.id = id;
     this.r1 = r1;
@@ -79,10 +77,16 @@ var objJL = new Person("JL", 0, 0, 0, 0, false);
 var objSZF = new Person("SZF", 0, 0, 0, 0, false);
 var objUsers = [objTJY, objLXR, objJL, objLK, objJHA, objSZF]; */
 
+var users = ["JZ", "JX", "TWN", "LJY", "ELI", "LSH", "RYD"];
+
 var objJZ = new Person("JZ", 0, 0, 0, 0, false);
 var objJX = new Person("JX", 0, 0, 0, 0, false);
-var objHJ = new Person("HJ", 0, 0, 0, 0, false);
-var objUsers = [objHJ, objJZ, objJX]; //THIS ARRAY MUST FOLLOW ARRAY SEQUENCE IN INDEX.JS
+var objTWN = new Person("TWN", 0, 0, 0, 0, false);
+var objLJY = new Person("LJY", 0, 0, 0, 0, false);
+var objELI = new Person("ELI", 0, 0, 0, 0, false);
+var objLSH = new Person("LSH", 0, 0, 0, 0, false);
+var objRYD = new Person("RYD", 0, 0, 0, 0, false);
+var objUsers = [objJZ, objJX, objTWN, objLJY, objELI, objLSH, objRYD]; //THIS ARRAY MUST FOLLOW ARRAY SEQUENCE IN INDEX.JS
 
 
 //------------------------------------------------------------------------------------------------------
@@ -319,6 +323,10 @@ io.on('connection', (sock) => {
 
     sock.on('chat-to-server', (data) => {
         io.emit('chat-to-clients', data);
+    });
+
+    sock.on('challengethisuser', (data) => {
+        io.emit('appendchallenger', data);
     });
 
     sock.on('challenge', (data) => {

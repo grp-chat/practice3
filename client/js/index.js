@@ -3,6 +3,9 @@ const sock = io();
 //let newLine = createNewLine();
 var rotation = 1;
 var roundNum = 1;
+
+var challClicked = 0;
+
 var wordRow = "row";
 var rowNum = 1;
 var userName = "Aum";
@@ -35,8 +38,8 @@ var rounds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; */
 
 /* var team1 = ["LK", "JHA", "SZF"];
 var team2 = ["TJY", "LXR", "JL"]; */
-var otherUsers = ["HJ", "JZ", "JX"];
-var students = ["HJ", "JZ", "JX"];
+var otherUsers = ["JZ", "JX", "TWN", "LJY", "ELI", "LSH", "RYD"];
+var students = ["JZ", "JX", "TWN", "LJY", "ELI", "LSH", "RYD"];
 var rounds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 var nickname = '';
@@ -130,12 +133,24 @@ const promptMsg = () => {
         nickname = 'LOK'
     } else if (nick === '7089') {
         nickname = 'JW'
-    } else if (nick === '1289') {
-        nickname = 'JZ'
     } else if (nick === '3825') {
+        nickname = 'JZ'
+    } else if (nick === '1289') {
         nickname = 'JX'
     } else if (nick === '1399') {
-        nickname = 'HJ'
+        nickname = 'JAY'
+    } else if (nick === '8579') {
+        nickname = 'TWN'
+    } else if (nick === '8828') {
+        nickname = 'LJY'
+    } else if (nick === '3191') {
+        nickname = 'ELI'
+    } else if (nick === '3307') {
+        nickname = 'CUR'
+    } else if (nick === '1529') {
+        nickname = 'LSH'
+    } else if (nick === '7385') {
+        nickname = 'RYD'
     } else {
         alert("Wrong pin number!");
         promptMsg();
@@ -189,6 +204,15 @@ sock.on('transmituser', data => {
         var togSpan = document.getElementById(span2Id);
         togSpan.style.background = "green";
     }
+
+});
+
+sock.on('appendchallenger', data => {
+    getTheRightDiv = document.getElementById(data.whichUser);
+    const shortNameDiv = document.createElement('div');
+        shortNameDiv.innerText = data.nickname;
+        getTheRightDiv.append(shortNameDiv);
+    
 
 });
 
@@ -864,7 +888,7 @@ function changeBackground(rotation) {
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-function appendMessage (message) {
+function appendMessage(message) {
     const messageDiv = document.createElement('div');
     messageDiv.innerText = message;
     div3.append(messageDiv);
@@ -879,8 +903,10 @@ function clickableGrid(rows, cols, callback, tblName, userId) {
     grid.style = "color:black";
     //grid.style.float = "left";
     redTitle = grid.appendChild(document.createElement('th'));
-    redTitle.style = "background:rgba(255, 0, 0, 0.6); color:white";
-    redTitle.colSpan = 3;
+    //redTitle.style = "background:rgba(255, 0, 0, 0.6); color:white";
+    redTitle.style.background = "coral";
+    redTitle.style.color = "white"
+    redTitle.colSpan = 2;
     redTitle.innerHTML = userId;
     var span2 = redTitle.appendChild(document.createElement('span'));
     span2.setAttribute("id", userId + "span2");
@@ -907,11 +933,11 @@ function clickableGrid(rows, cols, callback, tblName, userId) {
         }
     }
     grid.rows[0].cells[0].innerHTML = "Round";
-    grid.rows[0].cells[0].style.backgroundColor = "rgba(222,184,135, 0.7)";    
+    grid.rows[0].cells[0].style.backgroundColor = "rgba(222,184,135, 0.7)";
     grid.rows[1].cells[0].innerHTML = "Result";
-    grid.rows[1].cells[0].style.backgroundColor = "rgba(222,184,135, 0.7)";  
+    grid.rows[1].cells[0].style.backgroundColor = "rgba(222,184,135, 0.7)";
     grid.rows[2].cells[0].innerHTML = "Penalties";
-    grid.rows[2].cells[0].style.backgroundColor = "rgba(222,184,135, 0.7)";  
+    grid.rows[2].cells[0].style.backgroundColor = "rgba(222,184,135, 0.7)";
     return grid;
 }
 
@@ -919,7 +945,7 @@ function createNewDiv() {
     var div = document.createElement("div");
     div.setAttribute("id", "botdiv");
     div.style.width = "750px";
-    div.style.height = "300px";
+    div.style.height = "339px";
     //div.style = "background:rgba(255, 255, 255, 0.5); color:black; overflow: auto;"
     div.style.background = "rgba(255, 255, 255, 0.5)";
     div.style.color = "black";
@@ -930,6 +956,63 @@ function createNewDiv() {
     //div.innerHTML = "div";
     return div;
 }
+
+function createSideDiv(whichUser) {
+    var challBtn = document.createElement('button');
+    challBtn.className = "btn btn-warning";
+    //challBtn.setAttribute("id", whichUser);
+    challBtn.innerHTML = "Challenge!"
+    //challBtn.style.float = "center";
+    //challBtn.style.width = "100px"
+    //challBtn.style.height = "28px"
+    challBtn.style.marginLeft = "1px"
+    if (whichUser === nickname) {
+        challBtn.disabled = true;
+    }
+
+    var div5 = createNewDiv();
+    //div5.style.background = "rgba(255, 0, 0, 0.5)";
+    div5.setAttribute("id", whichUser);
+    div5.style.width = "105px";
+    div5.style.height = "208px";
+    div5.style.float = "right";
+    div5.style.margin = "0px";
+    div5.style.border = "1px solid black";
+    div5.appendChild(challBtn);
+
+    challBtn.addEventListener('click', function () {
+        //appendNameToDiv;
+        challBtn.disabled = true;
+        //var parentEl = challBtn.parentElement;
+        const shortNameDiv = document.createElement('div');
+        shortNameDiv.innerText = nickname;
+        //parentEl.append(shortNameDiv);
+        challClicked++;
+        if (challClicked === 2) {
+
+            var yeBtns = document.getElementsByClassName("btn btn-warning");
+            for (var i = 0; i < yeBtns.length; i++) {
+                yeBtns[i].disabled = true;
+            }
+        }
+        sock.emit('challengethisuser', { nickname, whichUser });
+        
+
+    });
+
+    return div5;
+}
+
+function appendNameToDiv() {
+
+    var parentEl = this.parentElement;
+    const shortNameDiv = document.createElement('div');
+    shortNameDiv.innerText = nickname;
+    parentEl.append(shortNameDiv);
+    //theBtn.disabled = true;
+    //div3.scrollTop = div3.scrollHeight;
+
+} //NOT IN USE===NOT IN USE===NOT IN USE===NOT IN USE===
 
 const index = otherUsers.indexOf(nickname);
 if (index > -1) {
@@ -981,7 +1064,8 @@ var grid3 = clickableGrid(3, 11, function (el, row, col, i) {
     } */
 }, "tbl3", otherUsers[1]);
 
-/* var grid4 = clickableGrid(3, 11, function (el, row, col, i) {
+
+var grid4 = clickableGrid(3, 11, function (el, row, col, i) {
 
     el.className = 'clicked';
     if (lastClicked) lastClicked.className = '';
@@ -1007,33 +1091,54 @@ var grid6 = clickableGrid(3, 11, function (el, row, col, i) {
     lastClicked = el;
     number = i
 
-}, "tbl6", otherUsers[4]); */
+}, "tbl6", otherUsers[4]);
+
+var grid7 = clickableGrid(3, 11, function (el, row, col, i) {
+    
+
+    el.className = 'clicked';
+    if (lastClicked) lastClicked.className = '';
+    lastClicked = el;
+    number = i
+
+}, "tbl7", otherUsers[5]);
 
 if (nickname === "TCR") {
-    var grid7 = clickableGrid(3, 11, function (el, row, col, i) {
-        
+    var grid8 = clickableGrid(3, 11, function (el, row, col, i) {
+
 
         el.className = 'clicked';
         if (lastClicked) lastClicked.className = '';
         lastClicked = el;
         number = i
 
-    }, "tbl7", otherUsers[2]);
+    }, "tbl8", otherUsers[6]);
 }
 
-document.body.appendChild(grid);
-grid.style.marginLeft = "2.8%";
+var topDiv = createNewDiv();
+topDiv.style.float = "left";
+topDiv.style.width = "785px";
+topDiv.style.height = "235px";
+topDiv.style.marginLeft = "5px";
+document.body.appendChild(topDiv);
+
+var sideDiv1 = createSideDiv(nickname);
+
+topDiv.appendChild(grid);
+grid.style.marginLeft = "2.1%";
 grid.style.float = "left";
+//grid.style.margin = "0px";
+topDiv.appendChild(sideDiv1);
 
 
 //LABEL=====LABEL=====LABEL=====LABEL=====LABEL=====LABEL=====LABEL=====LABEL=====LABEL=====LABEL=====
 labelRes = document.createElement('h2');
 //labelRes.setAttribute("id", "labelres");
 labelRes.innerHTML = "Round 1 - Result:";
-labelRes.style.width = "300px";
+labelRes.style.width = "250px";
 labelRes.style.color = "mediumblue";
 labelRes.style.float = "left";
-labelRes.style.marginLeft = "10px"
+labelRes.style.marginLeft = "0px"
 document.body.appendChild(labelRes);
 //LABEL=====LABEL=====LABEL=====LABEL=====LABEL=====LABEL=====LABEL=====LABEL=====LABEL=====LABEL=====
 
@@ -1064,10 +1169,10 @@ document.body.appendChild(subBtn);
 //LABEL=====LABEL=====LABEL=====LABEL=====LABEL=====LABEL=====LABEL=====LABEL=====LABEL=====LABEL=====
 labelPen = document.createElement('h2');
 labelPen.innerHTML = "Penalty Points:";
-labelPen.style.width = "300px";
+labelPen.style.width = "250px";
 labelPen.style.color = "mediumblue";
 labelPen.style.float = "left";
-labelPen.style.marginLeft = "10px"
+labelPen.style.marginLeft = "0px"
 document.body.appendChild(labelPen);
 //LABEL=====LABEL=====LABEL=====LABEL=====LABEL=====LABEL=====LABEL=====LABEL=====LABEL=====LABEL=====
 
@@ -1135,7 +1240,7 @@ if (nickname === "TCR") {
     select2.style.right = "250px";
 
     var editBtn = document.createElement('button');
-    editBtn.className = "btn btn-warning btn-lg";
+    editBtn.className = "btn btn-info btn-lg";
     editBtn.setAttribute("id", "editbtn");
     editBtn.innerHTML = "Edit";
     editBtn.style.position = "absolute";
@@ -1189,18 +1294,61 @@ document.body.appendChild(div0);
 //BOTTOM===DIV===BOTTOM===DIV===BOTTOM===DIV===BOTTOM===DIV===BOTTOM===DIV===BOTTOM===DIV===BOTTOM===DIV===
 var div1 = createNewDiv();
 div1.style.float = "left";
+div1.style.width = "800px";
 
+// var challBtn = document.createElement('button');
+// challBtn.className = "btn btn-warning";
+// challBtn.innerHTML = "Challenge"
+//challBtn.style.float = "center";
+//challBtn.style.width = "100px"
+//challBtn.style.height = "28px"
+// challBtn.style.marginLeft = "3.7px"
+
+
+// var div5 = createNewDiv();
+//div5.style.background = "rgba(255, 0, 0, 0.5)";
+// div5.style.width = "105px";
+// div5.style.height = "208px";
+// div5.style.float = "right";
+// div5.style.margin = "0px";
+// div5.style.border = "1px solid black";
+// div5.appendChild(challBtn);
 
 var bottomDiv = document.body.appendChild(div1);
+bottomDiv.style.marginLeft = "5px";
+var sideDiv2 = createSideDiv(otherUsers[0]);
+var sideDiv3 = createSideDiv(otherUsers[1]);
+var sideDiv4 = createSideDiv(otherUsers[2]);
+var sideDiv5 = createSideDiv(otherUsers[3]);
+var sideDiv6 = createSideDiv(otherUsers[4]);
+var sideDiv7 = createSideDiv(otherUsers[5]);
+var sideDiv8 = createSideDiv(otherUsers[6]);
+
 bottomDiv.appendChild(grid2);
+bottomDiv.appendChild(sideDiv2);
+
 bottomDiv.appendChild(grid3);
-/* bottomDiv.appendChild(grid4);
+bottomDiv.appendChild(sideDiv3);
+
+bottomDiv.appendChild(grid4);
+bottomDiv.appendChild(sideDiv4);
+
 bottomDiv.appendChild(grid5);
-bottomDiv.appendChild(grid6); */
+bottomDiv.appendChild(sideDiv5);
+
+bottomDiv.appendChild(grid6);
+bottomDiv.appendChild(sideDiv6);
+
+bottomDiv.appendChild(grid7);
+bottomDiv.appendChild(sideDiv7);
+
 
 if (nickname === "TCR") {
-    bottomDiv.appendChild(grid7);
+    bottomDiv.appendChild(grid8);
+    bottomDiv.appendChild(sideDiv8);
 }
+
+
 //BOTTOM===DIV===BOTTOM===DIV===BOTTOM===DIV===BOTTOM===DIV===BOTTOM===DIV===BOTTOM===DIV===BOTTOM===DIV===
 
 
@@ -1212,7 +1360,7 @@ var chatDiv = document.body.appendChild(div2);
 
 var chatInput = document.createElement('input');
 chatInput.className = "form-control";
-chatInput.style.width = "350px";
+chatInput.style.width = "338px";
 chatInput.style.height = "48px";
 chatInput.setAttribute("id", "chatinput");
 chatInput.setAttribute("type", "text");
@@ -1242,10 +1390,10 @@ chatBtn.addEventListener('click', function () {
     chatInput.value = '';
 });
 
-chatInput.addEventListener("keyup", function(event) {
+chatInput.addEventListener("keyup", function (event) {
     if (event.keyCode === 13) {
-      event.preventDefault();
-      document.getElementById("chatBtn").click();
+        event.preventDefault();
+        document.getElementById("chatBtn").click();
     }
 
 });
