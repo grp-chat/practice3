@@ -210,6 +210,7 @@ sock.on('transmituser', data => {
 sock.on('appendchallenger', data => {
     getTheRightDiv = document.getElementById(data.whichUser);
     const shortNameDiv = document.createElement('div');
+        //shortNameDiv.setAttribute("id", "tempdivs")
         shortNameDiv.innerText = data.nickname;
         getTheRightDiv.append(shortNameDiv);
     
@@ -250,12 +251,41 @@ sock.on('refreshall', data => {
     //lifeGiven = 0;
     roundNum = data;
     labelRes.innerHTML = "Round " + roundNum + " - Result:";
+    challClicked = 0;
 
 
     var clearIt = document.getElementById(nickname + "inputres");
     clearIt.value = '';
     clearIt = document.getElementById(nickname + "inputpen");
     clearIt.value = '';
+
+    for (var val of students) {
+        var getDivs = document.getElementById(val).getElementsByTagName('div');
+        //var removealldivs = getSideDiv.getElementsByTagName('div');
+        var divList = Array.prototype.slice.call(getDivs);
+        //alert(Array.isArray(divList));
+        divList.forEach((element) => {
+            element.remove();
+        });
+            
+        
+
+        
+        /* for (div of removealldivs) {
+            div.remove();
+            //alert(count);
+            //count++;
+        } */
+        
+        
+        //clearTheDivs.innerHTML = '';
+    }
+    var yeBtns = document.getElementsByClassName("btn btn-warning");
+            for (var i = 0; i < yeBtns.length; i++) {
+                yeBtns[i].disabled = false;
+            }
+    var disableBtn = document.getElementById("xEnable");
+    disableBtn.disabled = true;
 });
 
 sock.on('reshistory', data => {
@@ -968,6 +998,7 @@ function createSideDiv(whichUser) {
     challBtn.style.marginLeft = "1px"
     if (whichUser === nickname) {
         challBtn.disabled = true;
+        challBtn.setAttribute("id", "xEnable");
     }
 
     var div5 = createNewDiv();
@@ -982,7 +1013,7 @@ function createSideDiv(whichUser) {
 
     challBtn.addEventListener('click', function () {
         //appendNameToDiv;
-        challBtn.disabled = true;
+        //challBtn.disabled = true;
         //var parentEl = challBtn.parentElement;
         const shortNameDiv = document.createElement('div');
         shortNameDiv.innerText = nickname;
@@ -1377,7 +1408,7 @@ chatDiv.appendChild(chatBtn);
 
 var div3 = createNewDiv();
 div3.style.width = '420px';
-div3.style.height = '250px'
+div3.style.height = '280px'
 div3.style.color = 'black';
 div3.style.background = 'rgba(236, 236, 236, 0.5)';
 div3.setAttribute("id", "chatdiv");
