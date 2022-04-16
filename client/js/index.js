@@ -1153,7 +1153,7 @@ if (nickname === "TCR") {
         lastClicked = el;
         number = i
 
-    }, "tbl9", otherUsers[9]);
+    }, "tbl9", otherUsers[7]);
 }
 
 var topDiv = createNewDiv();
