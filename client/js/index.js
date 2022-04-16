@@ -38,8 +38,8 @@ var rounds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; */
 
 /* var team1 = ["LK", "JHA", "SZF"];
 var team2 = ["TJY", "LXR", "JL"]; */
-var otherUsers = ["JZ", "JX", "TWN", "LJY", "ELI", "LSH", "RYD"];
-var students = ["JZ", "JX", "TWN", "LJY", "ELI", "LSH", "RYD"];
+var otherUsers = ["JZ", "JX", "TWN", "LJY", "ELI", "LSH", "RYD", "CUR"];
+var students = ["JZ", "JX", "TWN", "LJY", "ELI", "LSH", "RYD", "CUR"];
 var rounds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 var nickname = '';
@@ -1134,8 +1134,18 @@ var grid7 = clickableGrid(3, 11, function (el, row, col, i) {
 
 }, "tbl7", otherUsers[5]);
 
+var grid8 = clickableGrid(3, 11, function (el, row, col, i) {
+    
+
+    el.className = 'clicked';
+    if (lastClicked) lastClicked.className = '';
+    lastClicked = el;
+    number = i
+
+}, "tbl8", otherUsers[6]);
+
 if (nickname === "TCR") {
-    var grid8 = clickableGrid(3, 11, function (el, row, col, i) {
+    var grid9 = clickableGrid(3, 11, function (el, row, col, i) {
 
 
         el.className = 'clicked';
@@ -1143,7 +1153,7 @@ if (nickname === "TCR") {
         lastClicked = el;
         number = i
 
-    }, "tbl8", otherUsers[6]);
+    }, "tbl9", otherUsers[9]);
 }
 
 var topDiv = createNewDiv();
@@ -1354,6 +1364,7 @@ var sideDiv5 = createSideDiv(otherUsers[3]);
 var sideDiv6 = createSideDiv(otherUsers[4]);
 var sideDiv7 = createSideDiv(otherUsers[5]);
 var sideDiv8 = createSideDiv(otherUsers[6]);
+var sideDiv9 = createSideDiv(otherUsers[7]);
 
 bottomDiv.appendChild(grid2);
 bottomDiv.appendChild(sideDiv2);
@@ -1372,11 +1383,13 @@ bottomDiv.appendChild(sideDiv6);
 
 bottomDiv.appendChild(grid7);
 bottomDiv.appendChild(sideDiv7);
+bottomDiv.appendChild(grid8);
+bottomDiv.appendChild(sideDiv8);
 
 
 if (nickname === "TCR") {
-    bottomDiv.appendChild(grid8);
-    bottomDiv.appendChild(sideDiv8);
+    bottomDiv.appendChild(grid9);
+    bottomDiv.appendChild(sideDiv9);
 }
 
 

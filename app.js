@@ -77,7 +77,7 @@ var objJL = new Person("JL", 0, 0, 0, 0, false);
 var objSZF = new Person("SZF", 0, 0, 0, 0, false);
 var objUsers = [objTJY, objLXR, objJL, objLK, objJHA, objSZF]; */
 
-var users = ["JZ", "JX", "TWN", "LJY", "ELI", "LSH", "RYD"];
+var users = ["JZ", "JX", "TWN", "LJY", "ELI", "LSH", "RYD", "CUR"];
 
 var objJZ = new Person("JZ", 0, 0, 0, 0, false);
 var objJX = new Person("JX", 0, 0, 0, 0, false);
@@ -86,7 +86,8 @@ var objLJY = new Person("LJY", 0, 0, 0, 0, false);
 var objELI = new Person("ELI", 0, 0, 0, 0, false);
 var objLSH = new Person("LSH", 0, 0, 0, 0, false);
 var objRYD = new Person("RYD", 0, 0, 0, 0, false);
-var objUsers = [objJZ, objJX, objTWN, objLJY, objELI, objLSH, objRYD]; //THIS ARRAY MUST FOLLOW ARRAY SEQUENCE IN INDEX.JS
+var objCUR = new Person("CUR", 0, 0, 0, 0, false);
+var objUsers = [objJZ, objJX, objTWN, objLJY, objELI, objLSH, objRYD, objCUR]; //THIS ARRAY MUST FOLLOW ARRAY SEQUENCE IN INDEX.JS
 
 
 //------------------------------------------------------------------------------------------------------
