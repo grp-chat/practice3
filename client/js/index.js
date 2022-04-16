@@ -12,6 +12,7 @@ var userName = "Aum";
 var userId = "AA";
 var userName2 = "Julie ";
 var userId2 = "NN";
+var reset = "";
 
 
 /* var userId3 = "LK";
